@@ -1,163 +1,272 @@
 <!doctype html>
-<html lang="id" data-theme="dark">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arcade Game Hub</title>
+    <title>Arcade Game Hub — 10 Game Kasual Premium</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-
-    <meta
-      name="description"
-      content="Dashboard arcade game kasual premium dan responsif dengan 10 permainan mini."
-    />
+    <meta name="description" content="Dashboard arcade game kasual premium dan responsif dengan 10 permainan mini. Mainkan Tebak Angka, 2048, Quiz Trivia, dan banyak lagi." />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Background Orbs -->
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <!-- Header -->
     <header class="header">
+      <div class="header-badge">🎮 10 Games Available</div>
       <h1 class="title">Arcade Game Hub</h1>
-      <p class="subtitle">
-        Mainkan 10 game kasual premium di perangkat apa saja
-      </p>
+      <p class="subtitle">Mainkan 10 game kasual premium langsung di browser — gratis, tanpa install.</p>
+
+      <div class="stats-bar" id="stats-bar">
+        <div class="stat-item">
+          <span>🕹️</span>
+          <span>Total Game: <strong>10</strong></span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span>🏆</span>
+          <span>Highscore Tersimpan: <strong id="stat-scores">0</strong></span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span>⚡</span>
+          <span>No Install, No Login</span>
+        </div>
+      </div>
     </header>
 
-    <main class="dashboard" role="navigation" aria-label="Daftar permainan">
-      <section class="games-grid">
-        <a
-          href="games/guess-number.html"
-          class="game-card"
-          role="button"
-          aria-label="Tebak Angka"
-        >
-          <span class="card-icon" aria-hidden="true">🔢</span>
+    <!-- Game Grid -->
+    <main class="dashboard">
+      <p class="section-label">Pilih Game</p>
+      <section class="games-grid" aria-label="Daftar permainan">
+
+        <!-- Tebak Angka -->
+        <a href="games/guess-number.html" class="game-card" aria-label="Main Tebak Angka">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">🔢</div>
+            <div class="card-tags">
+              <span class="tag tag-reflex">Reflex</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>Tebak Angka</h2>
-            <p>Komputer memilih angka, tebak dengan petunjuk arah.</p>
+            <p>Komputer memilih angka, tebak dengan petunjuk lebih besar / lebih kecil.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">Best: <span id="hs-guess">—</span></div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
 
-        <a
-          href="games/rps.html"
-          class="game-card"
-          role="button"
-          aria-label="Batu Gunting Kertas"
-        >
-          <span class="card-icon" aria-hidden="true">✌️</span>
+        <!-- RPS -->
+        <a href="games/rps.html" class="game-card" aria-label="Main Batu Gunting Kertas">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">✌️</div>
+            <div class="card-tags">
+              <span class="tag tag-classic">Classic</span>
+              <span class="badge-hot">HOT</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>Batu Gunting</h2>
-            <p>Lawan komputer klasik dengan pelacakan skor.</p>
+            <p>Lawan komputer dalam permainan batu-gunting-kertas klasik dengan pelacakan skor.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">Win: <span id="hs-rps">—</span></div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
 
-        <a
-          href="games/tic-tac-toe.html"
-          class="game-card"
-          role="button"
-          aria-label="Tic Tac Toe"
-        >
-          <span class="card-icon" aria-hidden="true">❌</span>
+        <!-- Tic Tac Toe -->
+        <a href="games/tic-tac-toe.html" class="game-card" aria-label="Main Tic Tac Toe">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">❌</div>
+            <div class="card-tags">
+              <span class="tag tag-strategy">Strategy</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>Tic‑Tac‑Toe</h2>
-            <p>Mainkan bersama teman atau lawan AI (Mode Sulit).</p>
+            <p>Mainkan bersama teman atau tantang AI Minimax yang sangat sulit dikalahkan.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">2 Player / AI</div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
 
-        <a
-          href="games/memory-card.html"
-          class="game-card"
-          role="button"
-          aria-label="Memory Card"
-        >
-          <span class="card-icon" aria-hidden="true">🎴</span>
+        <!-- Memory Card -->
+        <a href="games/memory-card.html" class="game-card" aria-label="Main Memory Card">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">🎴</div>
+            <div class="card-tags">
+              <span class="tag tag-puzzle">Puzzle</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>Memory Card</h2>
-            <p>Uji ingatan Anda dengan mencocokkan kartu.</p>
+            <p>Uji daya ingat dengan mencocokkan pasangan kartu tersembunyi secepat mungkin.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">Best: <span id="hs-memory">—</span></div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
 
-        <a
-          href="games/whack-a-mole.html"
-          class="game-card"
-          role="button"
-          aria-label="Whack a Mole"
-        >
-          <span class="card-icon" aria-hidden="true">🔨</span>
+        <!-- Whack a Mole -->
+        <a href="games/whack-a-mole.html" class="game-card" aria-label="Main Whack a Mole">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">🔨</div>
+            <div class="card-tags">
+              <span class="tag tag-reflex">Reflex</span>
+              <span class="badge-hot">HOT</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>Whack‑a‑Mole</h2>
-            <p>Kecepatan tangan mengklik target yang muncul acak.</p>
+            <p>Pukul tikus yang muncul secara acak secepat mungkin dalam 30 detik!</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">Best: <span id="hs-whack">—</span></div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
 
-        <a
-          href="games/reaction-time.html"
-          class="game-card"
-          role="button"
-          aria-label="Reaction Time Test"
-        >
-          <span class="card-icon" aria-hidden="true">⚡</span>
+        <!-- Reaction Time -->
+        <a href="games/reaction-time.html" class="game-card" aria-label="Main Reaction Test">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">⚡</div>
+            <div class="card-tags">
+              <span class="tag tag-reflex">Reflex</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>Reaction Test</h2>
-            <p>Seberapa cepat refleks Anda? Ukur dalam milidetik.</p>
+            <p>Seberapa cepat refleks Anda? Ukur waktu reaksi dalam milidetik.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">Best: <span id="hs-reaction">—</span></div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
 
-        <a
-          href="games/clicker.html"
-          class="game-card"
-          role="button"
-          aria-label="Clicker Game"
-        >
-          <span class="card-icon" aria-hidden="true">🖱️</span>
+        <!-- Clicker -->
+        <a href="games/clicker.html" class="game-card" aria-label="Main Klik Cepat">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">🖱️</div>
+            <div class="card-tags">
+              <span class="tag tag-idle">Idle</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>Klik Cepat</h2>
-            <p>Kumpulkan poin sebanyak mungkin dan beli upgrade.</p>
+            <p>Kumpulkan poin sebanyak mungkin, beli upgrade, dan otomatisasi klikmu.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">Skor: <span id="hs-clicker">—</span></div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
 
-        <a
-          href="games/hangman.html"
-          class="game-card"
-          role="button"
-          aria-label="Hangman"
-        >
-          <span class="card-icon" aria-hidden="true">🔤</span>
+        <!-- Hangman -->
+        <a href="games/hangman.html" class="game-card" aria-label="Main Hangman">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">🔤</div>
+            <div class="card-tags">
+              <span class="tag tag-puzzle">Puzzle</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>Hangman</h2>
-            <p>Tebak huruf untuk menyelamatkan karakter.</p>
+            <p>Tebak huruf demi huruf untuk menyelamatkan karakter dari hukuman gantung.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">Word Game</div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
 
-        <a
-          href="games/game-2048.html"
-          class="game-card"
-          role="button"
-          aria-label="2048"
-        >
-          <span class="card-icon" aria-hidden="true">🧩</span>
+        <!-- 2048 -->
+        <a href="games/game-2048.html" class="game-card" aria-label="Main 2048">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">🧩</div>
+            <div class="card-tags">
+              <span class="tag tag-strategy">Strategy</span>
+              <span class="badge-hot">HOT</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>2048</h2>
-            <p>Gabungkan kotak angka hingga mencapai 2048.</p>
+            <p>Gabungkan ubin angka hingga mencapai 2048. Mudah dipelajari, sulit dikuasai.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">Best: <span id="hs-2048">—</span></div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
 
-        <a
-          href="games/quiz.html"
-          class="game-card"
-          role="button"
-          aria-label="Quiz Pilihan Ganda"
-        >
-          <span class="card-icon" aria-hidden="true">🧠</span>
+        <!-- Quiz -->
+        <a href="games/quiz.html" class="game-card" aria-label="Main Quiz Trivia">
+          <div class="card-top">
+            <div class="card-icon" aria-hidden="true">🧠</div>
+            <div class="card-tags">
+              <span class="tag tag-trivia">Trivia</span>
+            </div>
+          </div>
           <div class="card-content">
             <h2>Quiz Trivia</h2>
-            <p>Jawab pertanyaan pilihan ganda dari database JSON.</p>
+            <p>Jawab pertanyaan pilihan ganda dari database pengetahuan umum yang luas.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-score">Best: <span id="hs-quiz">—</span></div>
+            <div class="card-arrow">→</div>
           </div>
         </a>
+
       </section>
     </main>
 
     <footer class="footer">
-      <p>© 2026 Arcade Game Hub • Dev By vicky</p>
+      <p>© 2026 <strong>Arcade Game Hub</strong> — Made with ❤️ by <a href="#">vicky</a></p>
     </footer>
 
+    <div id="toast-container" aria-live="polite"></div>
+
     <script src="script.js"></script>
+    <script>
+      // Tampilkan highscore di setiap card
+      const scoreMap = {
+        'hs-guess':    { key: 'highscore_guess_number_lowest', suffix: ' tries', lower: true },
+        'hs-reaction': { key: 'highscore_reaction_lowest', suffix: ' ms', lower: true },
+        'hs-whack':    { key: 'highscore_whack_a_mole', suffix: ' pts' },
+        'hs-2048':     { key: 'highscore_2048_best', suffix: '' },
+        'hs-quiz':     { key: 'highscore_quiz_score', suffix: ' pts' },
+        'hs-memory':   { key: 'highscore_memory_moves', suffix: ' moves', lower: true },
+        'hs-rps':      { key: 'rps_wins', suffix: ' wins' },
+        'hs-clicker':  { key: 'clicker_state', isJSON: true },
+      };
+
+      let savedCount = 0;
+      for (const [id, cfg] of Object.entries(scoreMap)) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const raw = localStorage.getItem(cfg.key);
+        if (raw) {
+          savedCount++;
+          if (cfg.isJSON) {
+            try {
+              const s = JSON.parse(raw);
+              el.textContent = Math.floor(s.score || 0).toLocaleString();
+            } catch(e) { el.textContent = '—'; }
+          } else {
+            const v = Number(raw);
+            el.textContent = (v > 0 && v < 9999) ? v.toLocaleString() + (cfg.suffix || '') : '—';
+          }
+        }
+      }
+      document.getElementById('stat-scores').textContent = savedCount;
+    </script>
   </body>
 </html>

@@ -1,103 +1,165 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Klik Cepat (Clicker) - Arcade Hub</title>
+  <title>Klik Cepat (Clicker) — Arcade Hub</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../style.css">
   <style>
-    .click-btn {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      font-size: 5rem;
-      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
-      border: 5px solid rgba(255,255,255,0.2);
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
-      transition: transform 0.1s;
-      display: flex;
+    .score-display {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-family: var(--font-title);
+      color: var(--cyan);
+      text-shadow: 0 0 30px rgba(0,229,255,0.35);
+      margin-bottom: 0.25rem;
+    }
+    .pps-row {
+      font-size: 0.85rem;
+      color: var(--color-text-dim);
+      margin-bottom: 1.5rem;
+    }
+    .pps-row span { color: var(--cyan); font-weight: 700; }
+
+    .click-btn-wrap {
+      position: relative;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin: 2rem auto;
+      margin-bottom: 2rem;
+    }
+    .click-btn {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      font-size: 4rem;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      border: 4px solid rgba(255,255,255,0.15);
+      cursor: pointer;
+      box-shadow: 0 0 40px rgba(0,229,255,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: transform 0.1s, box-shadow 0.1s;
+      display: flex; align-items: center; justify-content: center;
       user-select: none;
+      position: relative;
     }
+    .click-btn:hover { box-shadow: 0 0 60px rgba(0,229,255,0.5), inset 0 1px 0 rgba(255,255,255,0.2); }
     .click-btn:active {
-      transform: scale(0.9);
-      box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+      transform: scale(0.88);
+      box-shadow: 0 0 20px rgba(0,229,255,0.2);
     }
-    .score-display {
-      font-size: 3rem;
+    /* Ripple ring */
+    .click-btn-wrap::before {
+      content:'';
+      position:absolute;
+      width:100%; height:100%;
+      border-radius:50%;
+      border: 2px solid rgba(0,229,255,0.3);
+      animation: ringPulse 2s ease-in-out infinite;
+    }
+    @keyframes ringPulse {
+      0%,100%{transform:scale(1);opacity:0.6}
+      50%{transform:scale(1.2);opacity:0}
+    }
+
+    .flying-text {
+      position: absolute;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--cyan);
+      pointer-events: none;
+      animation: floatUp 0.9s ease-out forwards;
+      text-shadow: 0 0 10px rgba(0,229,255,0.5);
+      white-space: nowrap;
+    }
+    @keyframes floatUp {
+      0%  { opacity: 1;  transform: translateY(0) scale(1); }
+      100%{ opacity: 0;  transform: translateY(-60px) scale(1.4); }
+    }
+
+    .shop-title {
       font-family: var(--font-title);
-      color: var(--color-accent);
-      text-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      text-align: left;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--card-border);
     }
     .shop {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0.875rem;
       text-align: left;
     }
     .upgrade-item {
-      background: rgba(255,255,255,0.05);
-      padding: 1rem;
-      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-sm);
       border: 1px solid var(--card-border);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      gap: 0.6rem;
+      transition: border-color 0.2s;
     }
-    .upgrade-item button {
-      margin-top: 1rem;
-      width: 100%;
-    }
-    .flying-text {
-      position: absolute;
-      font-weight: bold;
-      color: white;
-      pointer-events: none;
-      animation: floatUp 1s ease-out forwards;
-    }
-    @keyframes floatUp {
-      0% { opacity: 1; transform: translateY(0) scale(1); }
-      100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
-    }
+    .upgrade-item:hover { border-color: rgba(0,229,255,0.25); }
+    .upgrade-item h3 { font-size: 0.95rem; font-weight: 700; }
+    .upgrade-item p  { font-size: 0.8rem; color: var(--color-text-dim); }
   </style>
 </head>
 <body>
-  <header class="header">
-    <h1 class="title">Klik Cepat</h1>
-    <a href="../index.html" class="btn" style="font-size: 0.8rem;">KEMBALI KE LOBBY</a>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <header class="game-header">
+    <a href="../index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Lobby
+    </a>
+    <span class="game-header-title">Klik Cepat</span>
+    <span class="game-header-icon">🖱️</span>
   </header>
+
   <main class="game-container">
     <div class="score-display" id="score">0</div>
-    <p style="color: var(--color-text-dim);">Poin per klik: <span id="ppc-display">1</span> | Poin per detik: <span id="pps-display">0</span></p>
-    
-    <div style="position: relative; display: inline-block;">
-      <div class="click-btn" id="click-btn">🖱️</div>
+    <div class="pps-row">
+      +<span id="ppc-display">1</span> per klik &nbsp;·&nbsp;
+      +<span id="pps-display">0</span> per detik
     </div>
-    
-    <h2 style="margin-top: 2rem; font-family: var(--font-title); font-size: 1.2rem; border-bottom: 2px solid var(--color-accent); padding-bottom: 0.5rem;">TOKO UPGRADE</h2>
-    <div class="shop">
-      <div class="upgrade-item">
-        <div>
-          <h3>Klik Ganda ⚡</h3>
-          <p style="font-size: 0.8rem; color: var(--color-text-dim);">+1 Poin per Klik</p>
+
+    <div class="click-btn-wrap">
+      <div class="click-btn" id="click-btn" role="button" tabindex="0" aria-label="Klik untuk mendapatkan poin">🖱️</div>
+    </div>
+
+    <div style="text-align:left; width:100%;">
+      <p class="shop-title">🏪 Toko Upgrade</p>
+      <div class="shop">
+        <div class="upgrade-item">
+          <div>
+            <h3>⚡ Klik Ganda</h3>
+            <p>+1 Poin per Klik</p>
+          </div>
+          <button class="btn btn-sm" id="btn-upgrade-click">
+            Beli · <span id="cost-click">50</span> pts
+          </button>
         </div>
-        <button class="btn" id="btn-upgrade-click" style="padding: 0.5rem; font-size: 0.8rem;">Harga: <span id="cost-click">50</span></button>
-      </div>
-      <div class="upgrade-item">
-        <div>
-          <h3>Pekerja Auto 🤖</h3>
-          <p style="font-size: 0.8rem; color: var(--color-text-dim);">+1 Poin per Detik</p>
+        <div class="upgrade-item">
+          <div>
+            <h3>🤖 Pekerja Auto</h3>
+            <p>+1 Poin per Detik</p>
+          </div>
+          <button class="btn btn-sm" id="btn-upgrade-auto">
+            Beli · <span id="cost-auto">100</span> pts
+          </button>
         </div>
-        <button class="btn" id="btn-upgrade-auto" style="padding: 0.5rem; font-size: 0.8rem;">Harga: <span id="cost-auto">100</span></button>
       </div>
     </div>
-    
-    <button class="btn mt-2" id="reset-btn" style="background: rgba(255,255,255,0.1); color: #fff; box-shadow: none; font-size:0.7rem;">Hapus Data Tersimpan</button>
+
+    <button class="btn btn-ghost btn-sm mt-2" id="reset-btn">🗑️ Hapus Data</button>
   </main>
+
+  <div id="toast-container"></div>
   <script src="../script.js"></script>
   <script src="clicker.js"></script>
 </body>

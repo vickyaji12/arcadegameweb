@@ -1,6 +1,7 @@
 const board = document.getElementById('memory-board');
 const movesEl = document.getElementById('moves');
 const timeEl = document.getElementById('time');
+const pairsEl = document.getElementById('pairs');
 const restartBtn = document.getElementById('restart-btn');
 
 const emojis = ['🐶', '🐱', '🐭', '🦊', '🐻', '🐼', '🐸', '🦄'];
@@ -27,6 +28,7 @@ function initGame() {
   gameStarted = false;
   movesEl.textContent = moves;
   timeEl.textContent = '0s';
+  if (pairsEl) pairsEl.textContent = '0/8';
   clearInterval(timer);
   
   cards.forEach(emoji => {
@@ -79,14 +81,24 @@ function checkForMatch() {
   if (isMatch) {
     disableCards();
     matches++;
+    if (pairsEl) pairsEl.textContent = `${matches}/8`;
     if (matches === emojis.length) {
       clearInterval(timer);
       setTimeout(() => {
-        let best = getHighScore('memory_card_moves') || 999;
+        let rawBest = localStorage.getItem('highscore_memory_moves');
+        let best = rawBest ? Number(rawBest) : null;
+        let isNewRecord = false;
+        
+        if (best === null || moves < best) {
+          localStorage.setItem('highscore_memory_moves', moves);
+          best = moves;
+          isNewRecord = true;
+        }
+        
         let msg = `Anda menyelesaikan dalam ${moves} gerakan dan waktu ${seconds} detik.`;
-        if (moves < best) {
-          setHighScore('memory_card_moves', moves);
+        if (isNewRecord) {
           msg += ' REKOR GERAKAN BARU!';
+          showToast('Rekor gerakan baru!', 'success');
         }
         showOverlay('Selamat!', msg, 'Main Lagi', initGame);
       }, 500);
@@ -97,6 +109,8 @@ function checkForMatch() {
 }
 
 function disableCards() {
+  firstCard.classList.add('matched');
+  secondCard.classList.add('matched');
   firstCard.removeEventListener('click', flipCard);
   secondCard.removeEventListener('click', flipCard);
   resetBoard();

@@ -1,78 +1,133 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Batu Gunting Kertas - Arcade Hub</title>
+  <title>Batu Gunting Kertas — Arcade Hub</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../style.css">
   <style>
+    /* BUG FIX: var(--color-border) → var(--card-border) */
     .choice-btn {
-      font-size: 3rem;
+      font-size: 2.8rem;
       background: rgba(255,255,255,0.05);
-      border: 2px solid var(--color-border);
+      border: 2px solid var(--card-border);
       border-radius: 50%;
-      width: 100px;
-      height: 100px;
+      width: 90px; height: 90px;
       cursor: pointer;
-      transition: all 0.3s;
-      margin: 0 10px;
+      transition: all 0.3s var(--ease-bounce);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
     }
     .choice-btn:hover {
-      transform: translateY(-10px) scale(1.1);
-      box-shadow: 0 10px 25px rgba(0, 242, 254, 0.4);
-      background: rgba(0, 242, 254, 0.2);
-      border-color: var(--color-accent);
+      transform: translateY(-10px) scale(1.15);
+      box-shadow: 0 12px 30px rgba(0,229,255,0.35);
+      background: rgba(0,229,255,0.12);
+      border-color: var(--card-border-hover);
     }
+    .choice-btn:active { transform: scale(0.9); }
+    .choices { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+
+    .arena {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 4rem;
+      min-height: 110px;
+      margin-bottom: 1.25rem;
+      padding: 1rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+    }
+    .arena-vs {
+      font-size: 1.1rem;
+      font-family: var(--font-title);
+      color: var(--color-text-muted);
+      letter-spacing: 2px;
+    }
+    .arena-hand { transition: transform 0.3s var(--ease-bounce); }
+    .arena-hand.shake { animation: handShake 0.4s ease; }
+    @keyframes handShake {
+      0%,100%{transform:scale(1)} 30%{transform:scale(1.3) rotate(-10deg)} 70%{transform:scale(1.2) rotate(5deg)}
+    }
+
+    #result-msg {
+      font-size: 1.4rem;
+      font-weight: 700;
+      min-height: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
     .score-board {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-      font-family: var(--font-title);
-      font-size: 0.8rem;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
     }
     .score-box {
-      background: rgba(0,0,0,0.3);
-      padding: 1rem;
-      border-radius: 12px;
-      min-width: 100px;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--card-border);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      min-width: 90px;
+      text-align: center;
+      font-family: var(--font-title);
+      font-size: 0.65rem;
+      color: var(--color-text-dim);
+      letter-spacing: 1px;
     }
     .score-box span {
       display: block;
-      font-size: 1.5rem;
-      margin-top: 0.5rem;
-      color: var(--color-accent);
+      font-size: 1.8rem;
+      margin-top: 4px;
+      color: var(--cyan);
+      font-weight: 700;
     }
+    .score-box.wins   span { color: var(--green); }
+    .score-box.losses span { color: var(--red); }
+    .score-box.ties   span { color: var(--yellow); }
   </style>
 </head>
 <body>
-  <header class="header">
-    <h1 class="title">Batu Gunting</h1>
-    <a href="../index.html" class="btn" style="font-size: 0.8rem;">KEMBALI KE LOBBY</a>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <header class="game-header">
+    <a href="../index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Lobby
+    </a>
+    <span class="game-header-title">Batu Gunting Kertas</span>
+    <span class="game-header-icon">✌️</span>
   </header>
+
   <main class="game-container">
-    <div id="arena" class="mb-2" style="font-size: 4rem; display: flex; justify-content: space-around; align-items: center; min-height: 120px;">
-      <div id="player-hand">❓</div>
-      <div style="font-size: 2rem; color: var(--color-text-dim);">VS</div>
-      <div id="computer-hand">❓</div>
+    <div class="arena" id="arena">
+      <div id="player-hand" class="arena-hand">🫵</div>
+      <div class="arena-vs">VS</div>
+      <div id="computer-hand" class="arena-hand">🤖</div>
     </div>
-    
-    <p id="result-msg" style="font-size: 1.5rem; font-weight: bold; min-height: 2rem; margin-bottom: 2rem;">Pilih senjatamu!</p>
+
+    <p id="result-msg" class="text-dim">Pilih senjatamu!</p>
 
     <div class="choices">
-      <button class="choice-btn" data-choice="rock">🪨</button>
-      <button class="choice-btn" data-choice="paper">📄</button>
-      <button class="choice-btn" data-choice="scissors">✂️</button>
+      <button class="choice-btn" data-choice="rock"     aria-label="Batu">🪨</button>
+      <button class="choice-btn" data-choice="paper"    aria-label="Kertas">📄</button>
+      <button class="choice-btn" data-choice="scissors" aria-label="Gunting">✂️</button>
     </div>
 
     <div class="score-board">
-      <div class="score-box">Menang <span id="score-win">0</span></div>
-      <div class="score-box">Kalah <span id="score-lose">0</span></div>
-      <div class="score-box">Seri <span id="score-tie">0</span></div>
+      <div class="score-box wins">MENANG<span id="score-win">0</span></div>
+      <div class="score-box ties">SERI<span id="score-tie">0</span></div>
+      <div class="score-box losses">KALAH<span id="score-lose">0</span></div>
     </div>
-    
-    <button class="btn mt-2" id="reset-stats" style="background: rgba(255,255,255,0.1); color: #fff; box-shadow: none;">Reset Skor</button>
+
+    <button class="btn btn-ghost btn-sm mt-2" id="reset-stats">Reset Skor</button>
   </main>
+
+  <div id="toast-container"></div>
   <script src="../script.js"></script>
   <script src="rps.js"></script>
 </body>

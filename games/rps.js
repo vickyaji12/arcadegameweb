@@ -57,6 +57,7 @@ document.querySelectorAll('.choice-btn').forEach(btn => {
       
       stats[outcome]++;
       localStorage.setItem('rps_stats', JSON.stringify(stats));
+      localStorage.setItem('rps_wins', stats.win);
       updateScoreUI();
     }, 150);
   });
@@ -65,6 +66,7 @@ document.querySelectorAll('.choice-btn').forEach(btn => {
 resetStatsBtn.addEventListener('click', () => {
   stats = { win: 0, lose: 0, tie: 0 };
   localStorage.removeItem('rps_stats');
+  localStorage.removeItem('rps_wins');
   updateScoreUI();
   playerHand.textContent = '❓';
   computerHand.textContent = '❓';

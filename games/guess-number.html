@@ -1,28 +1,107 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tebak Angka - Arcade Hub</title>
+  <title>Tebak Angka — Arcade Hub</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../style.css">
+  <style>
+    .guess-emoji {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      display: block;
+      filter: drop-shadow(0 0 16px rgba(0,229,255,0.4));
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)}
+    }
+    .guess-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    #feedback {
+      font-size: 1.3rem;
+      font-weight: 700;
+      min-height: 2rem;
+      margin-top: 1.25rem;
+      transition: all 0.3s;
+    }
+    #attempts {
+      font-family: var(--font-title);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-top: 0.5rem;
+      letter-spacing: 1px;
+    }
+    .best-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      color: var(--cyan);
+      padding: 5px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <h1 class="title">Tebak Angka</h1>
-    <a href="../index.html" class="btn" style="font-size: 0.8rem;">KEMBALI KE LOBBY</a>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <header class="game-header">
+    <a href="../index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Lobby
+    </a>
+    <span class="game-header-title">Tebak Angka</span>
+    <span class="game-header-icon">🔢</span>
   </header>
+
   <main class="game-container">
-    <p class="subtitle mb-2">Komputer memikirkan angka antara 1 hingga 100.</p>
-    <div style="font-size: 4rem; margin-bottom: 2rem; text-shadow: 0 0 20px rgba(0,242,254,0.5);">🔢</div>
-    <div id="game-ui">
-      <input type="number" id="guess-input" min="1" max="100" placeholder="1-100" style="padding: 12px; border-radius: 12px; font-size: 1.2rem; width: 120px; text-align: center; margin-right: 10px; background: rgba(255,255,255,0.05); border: 2px solid var(--color-accent); color: white; outline: none; transition: 0.3s;">
+    <span class="guess-emoji" aria-hidden="true">🔢</span>
+    <p class="subtitle mb-2">Komputer memikirkan angka antara <strong style="color:var(--cyan)">1</strong> hingga <strong style="color:var(--cyan)">100</strong>. Berapa percobaan yang kamu butuhkan?</p>
+
+    <div id="game-ui" class="guess-row">
+      <input
+        type="number"
+        id="guess-input"
+        class="game-input"
+        min="1" max="100"
+        placeholder="1–100"
+        aria-label="Masukkan tebakan angka"
+      >
       <button class="btn" id="guess-btn">TEBAK</button>
     </div>
-    <p id="feedback" class="mt-2" style="font-size: 1.5rem; font-weight: 800; min-height: 2rem;"></p>
-    <p id="attempts" class="mt-1" style="color: var(--color-text-dim); font-family: var(--font-title); font-size: 0.8rem;">Percobaan: 0</p>
-    <button class="btn mt-2" id="reset-btn" style="display:none; background: linear-gradient(135deg, #ff4757, #ff6b81);">MAIN LAGI</button>
+
+    <p id="feedback"></p>
+    <p id="attempts">Percobaan: 0</p>
+
+    <div class="best-badge" id="best-badge" style="display:none">
+      🏆 Rekor Terbaik: <span id="best-val">—</span> percobaan
+    </div>
+
+    <button class="btn btn-danger mt-2" id="reset-btn" style="display:none">🔄 MAIN LAGI</button>
   </main>
+
+  <div id="toast-container"></div>
   <script src="../script.js"></script>
   <script src="guess-number.js"></script>
+  <script>
+    // Show best score badge on load
+    const best = getLowScore('guess_number');
+    if (best !== null) {
+      document.getElementById('best-badge').style.display = 'inline-flex';
+      document.getElementById('best-val').textContent = best;
+    }
+  </script>
 </body>
 </html>

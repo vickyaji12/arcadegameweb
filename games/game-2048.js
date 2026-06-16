@@ -1,121 +1,97 @@
-const gridDisplay = document.getElementById('grid');
-const scoreDisplay = document.getElementById('score');
-const bestScoreDisplay = document.getElementById('best-score');
-const restartBtn = document.getElementById('restart-btn');
+// game-2048.js — Added mobile swipe support + toast feedback
 
-let squares = [];
-let score = 0;
-let bestScore = getHighScore('2048_best') || 0;
-bestScoreDisplay.textContent = bestScore;
+const gridDisplay     = document.getElementById('grid');
+const scoreDisplay    = document.getElementById('score');
+const bestScoreDisplay= document.getElementById('best-score');
+const restartBtn      = document.getElementById('restart-btn');
+
+let squares  = [];
+let score    = 0;
+let bestScore= getHighScore('2048_best') || 0;
+let gameActive = true;
+bestScoreDisplay.textContent = bestScore.toLocaleString();
 
 function createBoard() {
   gridDisplay.innerHTML = '';
   squares = [];
   for (let i = 0; i < 16; i++) {
-    let square = document.createElement('div');
+    const square = document.createElement('div');
     square.classList.add('grid-cell');
-    square.innerHTML = '';
     gridDisplay.appendChild(square);
     squares.push(square);
   }
   generate();
   generate();
+  gameActive = true;
 }
 
 function generate() {
-  const emptySquares = squares.filter(sq => sq.innerHTML == '');
-  if (emptySquares.length === 0) return;
-  
-  const randomSquare = emptySquares[Math.floor(Math.random() * emptySquares.length)];
-  randomSquare.innerHTML = Math.random() > 0.1 ? 2 : 4;
+  const empty = squares.filter(sq => sq.innerHTML === '');
+  if (empty.length === 0) return;
+  const sq = empty[Math.floor(Math.random() * empty.length)];
+  sq.innerHTML = Math.random() > 0.1 ? 2 : 4;
   updateColors();
 }
 
 function updateColors() {
-  squares.forEach(square => {
-    square.className = 'grid-cell'; // reset classes
-    if (square.innerHTML) {
-      square.classList.add(`tile-${square.innerHTML}`);
-    }
+  squares.forEach(sq => {
+    sq.className = 'grid-cell';
+    if (sq.innerHTML) sq.classList.add(`tile-${sq.innerHTML}`);
   });
 }
 
-function moveRight() {
+function slide(row) {
+  let filtered = row.filter(n => n !== 0);
+  const missing = 4 - filtered.length;
+  return Array(missing).fill(0).concat(filtered);
+}
+
+function slideRight() {
   for (let i = 0; i < 16; i += 4) {
-    let row = [
-      parseInt(squares[i].innerHTML || 0),
-      parseInt(squares[i+1].innerHTML || 0),
-      parseInt(squares[i+2].innerHTML || 0),
-      parseInt(squares[i+3].innerHTML || 0)
-    ];
-    let filteredRow = row.filter(num => num);
-    let missing = 4 - filteredRow.length;
-    let zeros = Array(missing).fill('');
-    let newRow = zeros.concat(filteredRow);
-    
-    for(let j=0; j<4; j++) squares[i+j].innerHTML = newRow[j];
+    let row = squares.slice(i, i+4).map(sq => parseInt(sq.innerHTML) || 0);
+    row = slide(row);
+    for (let j = 0; j < 4; j++) squares[i+j].innerHTML = row[j] || '';
   }
 }
 
-function moveLeft() {
+function slideLeft() {
   for (let i = 0; i < 16; i += 4) {
-    let row = [
-      parseInt(squares[i].innerHTML || 0),
-      parseInt(squares[i+1].innerHTML || 0),
-      parseInt(squares[i+2].innerHTML || 0),
-      parseInt(squares[i+3].innerHTML || 0)
-    ];
-    let filteredRow = row.filter(num => num);
-    let missing = 4 - filteredRow.length;
-    let zeros = Array(missing).fill('');
-    let newRow = filteredRow.concat(zeros);
-    
-    for(let j=0; j<4; j++) squares[i+j].innerHTML = newRow[j];
+    let row = squares.slice(i, i+4).map(sq => parseInt(sq.innerHTML) || 0);
+    let filtered = row.filter(n => n !== 0);
+    row = filtered.concat(Array(4 - filtered.length).fill(0));
+    for (let j = 0; j < 4; j++) squares[i+j].innerHTML = row[j] || '';
   }
 }
 
-function moveDown() {
+function slideDown() {
   for (let i = 0; i < 4; i++) {
-    let col = [
-      parseInt(squares[i].innerHTML || 0),
-      parseInt(squares[i+4].innerHTML || 0),
-      parseInt(squares[i+8].innerHTML || 0),
-      parseInt(squares[i+12].innerHTML || 0)
-    ];
-    let filteredCol = col.filter(num => num);
-    let missing = 4 - filteredCol.length;
-    let zeros = Array(missing).fill('');
-    let newCol = zeros.concat(filteredCol);
-    
-    for(let j=0; j<4; j++) squares[i+(j*4)].innerHTML = newCol[j];
+    let col = [0,1,2,3].map(r => parseInt(squares[i + r*4].innerHTML) || 0);
+    col = slide(col);
+    for (let r = 0; r < 4; r++) squares[i + r*4].innerHTML = col[r] || '';
   }
 }
 
-function moveUp() {
+function slideUp() {
   for (let i = 0; i < 4; i++) {
-    let col = [
-      parseInt(squares[i].innerHTML || 0),
-      parseInt(squares[i+4].innerHTML || 0),
-      parseInt(squares[i+8].innerHTML || 0),
-      parseInt(squares[i+12].innerHTML || 0)
-    ];
-    let filteredCol = col.filter(num => num);
-    let missing = 4 - filteredCol.length;
-    let zeros = Array(missing).fill('');
-    let newCol = filteredCol.concat(zeros);
-    
-    for(let j=0; j<4; j++) squares[i+(j*4)].innerHTML = newCol[j];
+    let col = [0,1,2,3].map(r => parseInt(squares[i + r*4].innerHTML) || 0);
+    let filtered = col.filter(n => n !== 0);
+    col = filtered.concat(Array(4 - filtered.length).fill(0));
+    for (let r = 0; r < 4; r++) squares[i + r*4].innerHTML = col[r] || '';
   }
 }
 
 function combineRow() {
   for (let i = 0; i < 15; i++) {
-    if (squares[i].innerHTML === squares[i+1].innerHTML && squares[i].innerHTML !== '' && (i+1)%4 !== 0) {
-      let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i+1].innerHTML);
-      squares[i].innerHTML = combinedTotal;
+    if (
+      squares[i].innerHTML !== '' &&
+      squares[i].innerHTML === squares[i+1].innerHTML &&
+      (i+1) % 4 !== 0
+    ) {
+      const val = parseInt(squares[i].innerHTML) * 2;
+      squares[i].innerHTML = val;
       squares[i+1].innerHTML = '';
-      score += combinedTotal;
-      scoreDisplay.textContent = score;
+      score += val;
+      scoreDisplay.textContent = score.toLocaleString();
     }
   }
   checkWin();
@@ -123,104 +99,115 @@ function combineRow() {
 
 function combineCol() {
   for (let i = 0; i < 12; i++) {
-    if (squares[i].innerHTML === squares[i+4].innerHTML && squares[i].innerHTML !== '') {
-      let combinedTotal = parseInt(squares[i].innerHTML) + parseInt(squares[i+4].innerHTML);
-      squares[i].innerHTML = combinedTotal;
+    if (
+      squares[i].innerHTML !== '' &&
+      squares[i].innerHTML === squares[i+4].innerHTML
+    ) {
+      const val = parseInt(squares[i].innerHTML) * 2;
+      squares[i].innerHTML = val;
       squares[i+4].innerHTML = '';
-      score += combinedTotal;
-      scoreDisplay.textContent = score;
+      score += val;
+      scoreDisplay.textContent = score.toLocaleString();
     }
   }
   checkWin();
 }
 
-// Controls
-function control(e) {
-  if(['ArrowRight','ArrowLeft','ArrowUp','ArrowDown'].includes(e.key)) {
-    e.preventDefault();
-  }
-  
-  let oldGrid = squares.map(s => s.innerHTML);
-  
-  if (e.key === 'ArrowRight') {
-    moveRight();
-    combineRow();
-    moveRight();
-  } else if (e.key === 'ArrowLeft') {
-    moveLeft();
-    combineRow();
-    moveLeft();
-  } else if (e.key === 'ArrowUp') {
-    moveUp();
-    combineCol();
-    moveUp();
-  } else if (e.key === 'ArrowDown') {
-    moveDown();
-    combineCol();
-    moveDown();
-  }
-  
-  let newGrid = squares.map(s => s.innerHTML);
-  if (oldGrid.join(',') !== newGrid.join(',')) {
-    generate();
-  }
+function doMove(direction) {
+  if (!gameActive) return;
+  const oldGrid = squares.map(s => s.innerHTML);
+
+  if      (direction === 'right') { slideRight(); combineRow(); slideRight(); }
+  else if (direction === 'left')  { slideLeft();  combineRow(); slideLeft();  }
+  else if (direction === 'up')    { slideUp();    combineCol(); slideUp();    }
+  else if (direction === 'down')  { slideDown();  combineCol(); slideDown();  }
+
+  const newGrid = squares.map(s => s.innerHTML);
+  if (oldGrid.join(',') !== newGrid.join(',')) generate();
   updateColors();
   checkForGameOver();
 }
 
-document.addEventListener('keydown', control);
+// ── Keyboard Control
+function onKeyDown(e) {
+  const map = {
+    ArrowRight: 'right', ArrowLeft: 'left',
+    ArrowUp: 'up', ArrowDown: 'down'
+  };
+  if (map[e.key]) {
+    e.preventDefault();
+    doMove(map[e.key]);
+  }
+}
+
+// ── Touch/Swipe Control (BUG FIX: tambah support mobile)
+let touchStartX = 0;
+let touchStartY = 0;
+
+gridDisplay.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].clientX;
+  touchStartY = e.changedTouches[0].clientY;
+}, { passive: true });
+
+gridDisplay.addEventListener('touchend', (e) => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  const absDx = Math.abs(dx);
+  const absDy = Math.abs(dy);
+  if (Math.max(absDx, absDy) < 20) return; // too small
+  if (absDx > absDy) {
+    doMove(dx > 0 ? 'right' : 'left');
+  } else {
+    doMove(dy > 0 ? 'down' : 'up');
+  }
+}, { passive: true });
 
 function checkWin() {
-  for (let i=0; i<squares.length; i++) {
-    if (squares[i].innerHTML == 2048) {
-      document.removeEventListener('keydown', control);
+  for (let sq of squares) {
+    if (sq.innerHTML == 2048) {
+      gameActive = false;
       updateBestScore();
-      showOverlay('Menang!', 'Anda telah mencapai 2048! 🎉', 'Main Lagi', initGame);
+      showOverlay('🏆 Menang!', `Anda mencapai 2048!\nSkor: ${score.toLocaleString()}`, 'Main Lagi', initGame);
+      return;
     }
   }
 }
 
 function checkForGameOver() {
-  let zeros = 0;
-  for (let i=0; i<squares.length; i++) {
-    if (squares[i].innerHTML == '') {
-      zeros++;
-    }
+  const empty = squares.filter(sq => sq.innerHTML === '');
+  if (empty.length > 0) return;
+
+  let canMove = false;
+  for (let i = 0; i < 15; i++) {
+    if (squares[i].innerHTML === squares[i+1].innerHTML && (i+1) % 4 !== 0) canMove = true;
   }
-  if (zeros === 0) {
-    // Check if any moves possible
-    let movesPossible = false;
-    for(let i=0; i<15; i++) {
-      if(squares[i].innerHTML === squares[i+1].innerHTML && (i+1)%4 !== 0) movesPossible = true;
-    }
-    for(let i=0; i<12; i++) {
-      if(squares[i].innerHTML === squares[i+4].innerHTML) movesPossible = true;
-    }
-    
-    if(!movesPossible) {
-      document.removeEventListener('keydown', control);
-      updateBestScore();
-      showOverlay('Game Over', `Skor akhir Anda: ${score}`, 'Coba Lagi', initGame);
-    }
+  for (let i = 0; i < 12; i++) {
+    if (squares[i].innerHTML === squares[i+4].innerHTML) canMove = true;
+  }
+
+  if (!canMove) {
+    gameActive = false;
+    updateBestScore();
+    showOverlay('Game Over', `Papan penuh, tidak ada gerakan.\nSkor akhir: ${score.toLocaleString()}`, 'Coba Lagi', initGame);
   }
 }
 
 function updateBestScore() {
   if (score > bestScore) {
     bestScore = score;
-    bestScoreDisplay.textContent = bestScore;
+    bestScoreDisplay.textContent = bestScore.toLocaleString();
     setHighScore('2048_best', bestScore);
+    showToast('Rekor skor baru!', 'success');
   }
 }
 
 function initGame() {
   score = 0;
-  scoreDisplay.textContent = score;
+  scoreDisplay.textContent = '0';
+  document.removeEventListener('keydown', onKeyDown);
+  document.addEventListener('keydown', onKeyDown);
   createBoard();
-  document.removeEventListener('keydown', control);
-  document.addEventListener('keydown', control);
 }
 
 restartBtn.addEventListener('click', initGame);
-
 initGame();

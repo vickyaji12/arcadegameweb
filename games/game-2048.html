@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2048 - Arcade Hub</title>
+  <title>2048 — Arcade Hub</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../style.css">
   <style>
     .game-2048-container {
       width: 100%;
-      max-width: 400px;
+      max-width: 340px;
       margin: 0 auto;
     }
     .grid-2048 {
@@ -16,72 +17,149 @@
       grid-template-columns: repeat(4, 1fr);
       grid-template-rows: repeat(4, 1fr);
       gap: 10px;
-      background: var(--color-bg-3);
-      padding: 10px;
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 12px;
+      border-radius: var(--radius);
       aspect-ratio: 1 / 1;
-      border: 2px solid var(--card-border);
+      border: 1px solid var(--card-border);
       position: relative;
     }
     .grid-cell {
-      background: rgba(255,255,255,0.05);
-      border-radius: 8px;
+      background: var(--bg-layer2);
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      font-weight: bold;
+      font-size: 1.8rem;
+      font-weight: 800;
       color: #fff;
+      font-family: var(--font-title);
       transition: all 0.15s ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      user-select: none;
     }
     
-    /* Tile Colors */
-    .tile-2 { background: #eee4da; color: #776e65; }
-    .tile-4 { background: #ede0c8; color: #776e65; }
-    .tile-8 { background: #f2b179; color: #f9f6f2; }
-    .tile-16 { background: #f59563; color: #f9f6f2; }
-    .tile-32 { background: #f67c5f; color: #f9f6f2; }
-    .tile-64 { background: #f65e3b; color: #f9f6f2; }
-    .tile-128 { background: #edcf72; color: #f9f6f2; font-size: 1.5rem; }
-    .tile-256 { background: #edcc61; color: #f9f6f2; font-size: 1.5rem; }
-    .tile-512 { background: #edc850; color: #f9f6f2; font-size: 1.5rem; }
-    .tile-1024 { background: #edc53f; color: #f9f6f2; font-size: 1.2rem; }
-    .tile-2048 { background: #edc22e; color: #f9f6f2; font-size: 1.2rem; box-shadow: 0 0 30px #edc22e; }
+    /* Neon Tile Colors */
+    .tile-2 {
+      background: rgba(0, 229, 255, 0.12);
+      color: var(--cyan);
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.2);
+    }
+    .tile-4 {
+      background: rgba(168, 85, 247, 0.12);
+      color: var(--purple);
+      border: 2px solid var(--purple);
+      box-shadow: 0 0 12px rgba(168, 85, 247, 0.2);
+    }
+    .tile-8 {
+      background: rgba(236, 72, 153, 0.12);
+      color: var(--pink);
+      border: 2px solid var(--pink);
+      box-shadow: 0 0 12px rgba(236, 72, 153, 0.2);
+    }
+    .tile-16 {
+      background: rgba(34, 211, 165, 0.12);
+      color: var(--green);
+      border: 2px solid var(--green);
+      box-shadow: 0 0 12px rgba(34, 211, 165, 0.2);
+    }
+    .tile-32 {
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--yellow);
+      border: 2px solid var(--yellow);
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.2);
+    }
+    .tile-64 {
+      background: rgba(251, 146, 60, 0.12);
+      color: var(--orange);
+      border: 2px solid var(--orange);
+      box-shadow: 0 0 12px rgba(251, 146, 60, 0.2);
+    }
+    .tile-128 {
+      background: rgba(0, 229, 255, 0.3);
+      color: #fff;
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 18px rgba(0, 229, 255, 0.4);
+      font-size: 1.5rem;
+    }
+    .tile-256 {
+      background: rgba(168, 85, 247, 0.3);
+      color: #fff;
+      border: 2px solid var(--purple);
+      box-shadow: 0 0 18px rgba(168, 85, 247, 0.4);
+      font-size: 1.5rem;
+    }
+    .tile-512 {
+      background: rgba(236, 72, 153, 0.3);
+      color: #fff;
+      border: 2px solid var(--pink);
+      box-shadow: 0 0 18px rgba(236, 72, 153, 0.4);
+      font-size: 1.5rem;
+    }
+    .tile-1024 {
+      background: rgba(34, 211, 165, 0.3);
+      color: #fff;
+      border: 2px solid var(--green);
+      box-shadow: 0 0 22px rgba(34, 211, 165, 0.5);
+      font-size: 1.2rem;
+    }
+    .tile-2048 {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #fff;
+      border: 2px solid #fff;
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.7);
+      font-size: 1.2rem;
+    }
     
     @media (max-width: 480px) {
-      .grid-cell { font-size: 1.5rem; }
-      .tile-128, .tile-256, .tile-512 { font-size: 1.2rem; }
-      .tile-1024, .tile-2048 { font-size: 1rem; }
+      .game-2048-container { max-width: 290px; }
+      .grid-2048 { gap: 6px; padding: 8px; }
+      .grid-cell { font-size: 1.4rem; border-radius: 6px; }
+      .tile-128, .tile-256, .tile-512 { font-size: 1.1rem; }
+      .tile-1024, .tile-2048 { font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <h1 class="title">2048</h1>
-    <a href="../index.html" class="btn" style="font-size: 0.8rem;">KEMBALI KE LOBBY</a>
+  <div class="orb orb-1" aria-hidden="true"></div>
+  <div class="orb orb-2" aria-hidden="true"></div>
+
+  <header class="game-header">
+    <a href="../index.html" class="back-btn">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Lobby
+    </a>
+    <span class="game-header-title">2048</span>
+    <span class="game-header-icon">🧩</span>
   </header>
+
   <main class="game-container">
-    <div style="display: flex; justify-content: space-between; align-items: center; max-width: 400px; margin: 0 auto 1.5rem;">
-      <div style="text-align: left;">
-        <div style="font-family: var(--font-title); font-size: 0.8rem; color: var(--color-text-dim);">Skor</div>
-        <div id="score" style="font-size: 2rem; font-weight: bold; color: var(--color-accent);">0</div>
+    <div class="flex-center mb-2">
+      <div class="stat-chip">
+        <div class="stat-chip-label">Skor</div>
+        <div class="stat-chip-value" id="score">0</div>
       </div>
-      <div style="text-align: right;">
-        <div style="font-family: var(--font-title); font-size: 0.8rem; color: var(--color-text-dim);">Terbaik</div>
-        <div id="best-score" style="font-size: 2rem; font-weight: bold;">0</div>
+      <div class="stat-chip">
+        <div class="stat-chip-label">Terbaik</div>
+        <div class="stat-chip-value" id="best-score" style="color:var(--yellow)">0</div>
       </div>
     </div>
     
-    <p class="mb-2" style="font-size: 0.9rem; color: var(--color-text-dim);">Gunakan tombol panah (⬅️⬆️⬇️➡️) untuk menggabungkan angka.</p>
+    <p class="text-dim text-center mb-2" style="font-size: 0.9rem; max-width: 360px; margin-left: auto; margin-right: auto;">
+      Gunakan tombol panah (⬅️⬆️⬇️➡️) atau <strong>geser (swipe)</strong> papan game untuk menggabungkan angka.
+    </p>
 
     <div class="game-2048-container">
-      <div class="grid-2048" id="grid">
+      <div class="grid-2048" id="grid" role="grid" aria-label="Papan Game 2048">
         <!-- Cells generated by JS -->
       </div>
     </div>
 
-    <button class="btn mt-2" id="restart-btn" style="padding: 0.8rem 2rem;">Mulai Baru</button>
+    <button class="btn btn-ghost btn-sm mt-2" id="restart-btn">🔄 Mulai Baru</button>
   </main>
+
+  <div id="toast-container"></div>
   <script src="../script.js"></script>
   <script src="game-2048.js"></script>
 </body>

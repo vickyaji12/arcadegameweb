@@ -1,6 +1,8 @@
 const holes = document.querySelectorAll('.hole');
 const scoreBoard = document.getElementById('score');
 const timeBoard = document.getElementById('time');
+const timerBar = document.getElementById('timer-bar');
+const bestScoreBoard = document.getElementById('best-score');
 const startBtn = document.getElementById('start-btn');
 const moles = document.querySelectorAll('.mole');
 
@@ -36,6 +38,13 @@ function peep() {
   }, time);
 }
 
+function updateTimerBar() {
+  if (timerBar) {
+    const percentage = (time / 30) * 100;
+    timerBar.style.width = `${percentage}%`;
+  }
+}
+
 function startGame() {
   scoreBoard.textContent = 0;
   timeBoard.textContent = 30;
@@ -43,22 +52,26 @@ function startGame() {
   score = 0;
   time = 30;
   startBtn.style.display = 'none';
+  updateTimerBar();
   peep();
   
   timerId = setInterval(() => {
     time--;
     timeBoard.textContent = time;
+    updateTimerBar();
     if (time <= 0) {
       clearInterval(timerId);
       timeUp = true;
       startBtn.style.display = 'inline-block';
       startBtn.textContent = 'MAIN LAGI';
       
-      let best = getHighScore('whack_score');
+      let best = getHighScore('whack_a_mole');
       let msg = `Skor akhir Anda adalah ${score}.`;
       if (score > best) {
-        setHighScore('whack_score', score);
+        setHighScore('whack_a_mole', score);
+        if (bestScoreBoard) bestScoreBoard.textContent = score;
         msg += ' REKOR BARU!';
+        showToast('Rekor skor baru!', 'success');
       }
       showOverlay('Waktu Habis!', msg, 'Tutup');
     }

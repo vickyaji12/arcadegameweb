@@ -3,6 +3,12 @@ const statusMsg = document.getElementById('status-msg');
 const restartBtn = document.getElementById('restart-btn');
 const modeSelect = document.getElementById('mode-select');
 
+// Score tracking elements & variables
+let scores = { x: 0, draw: 0, o: 0 };
+const scoreXEl = document.getElementById('score-x');
+const scoreDrawEl = document.getElementById('score-draw');
+const scoreOEl = document.getElementById('score-o');
+
 let board = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
 let gameActive = true;
@@ -50,6 +56,15 @@ function checkResult() {
     statusMsg.textContent = `Pemain ${winner} Menang! 🎉`;
     statusMsg.style.color = winner === 'X' ? 'var(--color-accent)' : '#ff4757';
     gameActive = false;
+    
+    if (winner === 'X') {
+      scores.x++;
+      if (scoreXEl) scoreXEl.textContent = scores.x;
+    } else {
+      scores.o++;
+      if (scoreOEl) scoreOEl.textContent = scores.o;
+    }
+
     showOverlay('Permainan Selesai', `Pemain ${winner} memenangkan permainan!`, 'Main Lagi', resetGame);
     return;
   }
@@ -58,6 +73,10 @@ function checkResult() {
     statusMsg.textContent = 'Permainan Seri!';
     statusMsg.style.color = '#ffa502';
     gameActive = false;
+    
+    scores.draw++;
+    if (scoreDrawEl) scoreDrawEl.textContent = scores.draw;
+
     showOverlay('Permainan Selesai', 'Wah, seri! Tidak ada yang menang.', 'Main Lagi', resetGame);
     return;
   }
