@@ -14,15 +14,23 @@ let score = 0;
 
 async function loadQuestions() {
   try {
-    const response = await fetch("../data/quiz-questions.json");
-    if (!response.ok) throw new Error("Network response was not ok");
+    // Gunakan URL absolut berdasarkan lokasi saat ini agar tidak tergantung folder deploy
+    const url = new URL("../data/quiz-questions.json", window.location.href);
+    const response = await fetch(url.toString());
+
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status} - ${response.statusText} (GET ${url})`,
+      );
+    }
+
     questions = await response.json();
     startGame();
   } catch (error) {
     console.error("Fetch error:", error);
     errorMsg.style.display = "block";
-    errorMsg.textContent =
-      "Gagal memuat pertanyaan (JSON). Periksa apakah file ../data/quiz-questions.json ikut di-deploy ke GitHub Pages dan tidak 404.";
+    const message = error && error.message ? error.message : "unknown";
+    errorMsg.textContent = `Gagal memuat JSON kuis. Cek console untuk detail. Error: ${message}`;
   }
 }
 
@@ -52,6 +60,7 @@ function showQuestion() {
 }
 
 function resetState() {
+  errorMsg.style.display = "none";
   nextBtn.style.display = "none";
   while (optionsEl.firstChild) {
     optionsEl.removeChild(optionsEl.firstChild);
@@ -67,7 +76,7 @@ function selectAnswer(e) {
 
   if (isCorrect) {
     selectedBtn.classList.add("correct");
-    score += 20; // 20 pts per question assuming 5 questions = 100 max
+    score += 20; // 20 pts per question
     qScoreEl.textContent = `Skor: ${score}`;
   } else {
     selectedBtn.classList.add("wrong");
