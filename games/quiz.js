@@ -121,7 +121,36 @@ function showResults() {
   showOverlay("Kuis Selesai", msg, "Tutup");
 }
 
+// Pop-up pemberitahuan sementara (agar user tidak bingung saat Quiz Trivia masih dalam proses perbaikan)
+const MAINTENANCE_MODE = true;
+
+function showMaintenancePopup() {
+  try {
+    showOverlay(
+      "Pemberitahuan",
+      "Quiz Trivia sedang dalam proses perbaikan. Mohon pengertiannya—silakan coba kembali nanti.",
+      "Mengerti",
+    );
+  } catch (e) {
+    // fallback jika overlay helper tidak ada
+    alert(
+      "Quiz Trivia sedang dalam proses perbaikan. Mohon pengertiannya—silakan coba kembali nanti.",
+    );
+  }
+}
+
+// Notifikasi saat halaman diakses
+if (MAINTENANCE_MODE) {
+  // tunggu sedikit agar DOM ready dan overlay helper sudah tersedia
+  window.addEventListener("load", () => showMaintenancePopup(), { once: true });
+}
+
 startBtn.addEventListener("click", () => {
+  if (MAINTENANCE_MODE) {
+    showMaintenancePopup();
+    return;
+  }
+
   if (questions.length === 0) {
     loadQuestions();
   } else {
