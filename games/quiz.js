@@ -1,5 +1,5 @@
-// BUG FIX: MAINTENANCE_MODE dimatikan — quiz sudah bisa berjalan normal
-const MAINTENANCE_MODE = false;
+// MAINTENANCE_MODE: Set to true if the quiz is under developer maintenance
+const MAINTENANCE_MODE = true;
 
 const startBtn    = document.getElementById("start-btn");
 const quizSetup   = document.getElementById("quiz-setup");
@@ -17,7 +17,26 @@ let currentQIndex = 0;
 let score         = 0;
 let answered      = false;
 
+// Check maintenance mode on load
+document.addEventListener("DOMContentLoaded", () => {
+  if (MAINTENANCE_MODE) {
+    if (startBtn) {
+      startBtn.disabled = true;
+      startBtn.textContent = "DALAM PERBAIKAN";
+    }
+    showOverlay(
+      "Kuis Trivia Sedang Diperbaiki 🛠️",
+      "Halo Pemain Setia,\n\nSaat ini game Quiz Trivia sedang berada dalam proses pemeliharaan berkala dan pengembangan fitur terbaru oleh tim developer demi meningkatkan kenyamanan serta keseruan Anda bermain.\n\nKami mohon maaf atas ketidaknyamanan ini dan sedang berupaya agar game dapat segera kembali diakses dengan bank soal yang lebih menantang.\n\nTerima kasih atas pengertian, kesabaran, dan dukungan Anda. Silakan mencoba game seru lainnya yang tersedia di lobby!",
+      "Kembali ke Lobby",
+      () => {
+        window.location.href = "../index.html";
+      }
+    );
+  }
+});
+
 async function loadQuestions() {
+  if (MAINTENANCE_MODE) return;
   startBtn.disabled = true;
   startBtn.textContent = "Memuat...";
   try {
