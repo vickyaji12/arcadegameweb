@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klik Cepat (Clicker) - Arcade Hub</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .click-btn {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      font-size: 5rem;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+      border: 5px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
+      transition: transform 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem auto;
+      user-select: none;
+    }
+    .click-btn:active {
+      transform: scale(0.9);
+      box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+    }
+    .score-display {
+      font-size: 3rem;
+      font-family: var(--font-title);
+      color: var(--color-accent);
+      text-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+    }
+    .shop {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .upgrade-item {
+      background: rgba(255,255,255,0.05);
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .upgrade-item button {
+      margin-top: 1rem;
+      width: 100%;
+    }
+    .flying-text {
+      position: absolute;
+      font-weight: bold;
+      color: white;
+      pointer-events: none;
+      animation: floatUp 1s ease-out forwards;
+    }
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Klik Cepat</h1>
+    <a href="../index.html" class="btn" style="font-size: 0.8rem;">KEMBALI KE LOBBY</a>
+  </header>
+  <main class="game-container">
+    <div class="score-display" id="score">0</div>
+    <p style="color: var(--color-text-dim);">Poin per klik: <span id="ppc-display">1</span> | Poin per detik: <span id="pps-display">0</span></p>
+    
+    <div style="position: relative; display: inline-block;">
+      <div class="click-btn" id="click-btn">🖱️</div>
+    </div>
+    
+    <h2 style="margin-top: 2rem; font-family: var(--font-title); font-size: 1.2rem; border-bottom: 2px solid var(--color-accent); padding-bottom: 0.5rem;">TOKO UPGRADE</h2>
+    <div class="shop">
+      <div class="upgrade-item">
+        <div>
+          <h3>Klik Ganda ⚡</h3>
+          <p style="font-size: 0.8rem; color: var(--color-text-dim);">+1 Poin per Klik</p>
+        </div>
+        <button class="btn" id="btn-upgrade-click" style="padding: 0.5rem; font-size: 0.8rem;">Harga: <span id="cost-click">50</span></button>
+      </div>
+      <div class="upgrade-item">
+        <div>
+          <h3>Pekerja Auto 🤖</h3>
+          <p style="font-size: 0.8rem; color: var(--color-text-dim);">+1 Poin per Detik</p>
+        </div>
+        <button class="btn" id="btn-upgrade-auto" style="padding: 0.5rem; font-size: 0.8rem;">Harga: <span id="cost-auto">100</span></button>
+      </div>
+    </div>
+    
+    <button class="btn mt-2" id="reset-btn" style="background: rgba(255,255,255,0.1); color: #fff; box-shadow: none; font-size:0.7rem;">Hapus Data Tersimpan</button>
+  </main>
+  <script src="../script.js"></script>
+  <script src="clicker.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe - Arcade Hub</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 10px;
+      margin: 0 auto;
+      justify-content: center;
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 16px;
+      width: fit-content;
+    }
+    .cell {
+      background: var(--color-bg-2);
+      border: 2px solid var(--card-border);
+      border-radius: 8px;
+      font-size: 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cell:hover {
+      background: rgba(0, 242, 254, 0.1);
+    }
+    .cell.x { color: var(--color-accent); }
+    .cell.o { color: #ff4757; }
+    .status {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      min-height: 2rem;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+    .controls select {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid var(--color-accent);
+      padding: 0.5rem;
+      border-radius: 8px;
+      font-family: var(--font-body);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Tic-Tac-Toe</h1>
+    <a href="../index.html" class="btn" style="font-size: 0.8rem;">KEMBALI KE LOBBY</a>
+  </header>
+  <main class="game-container">
+    
+    <div class="controls">
+      <select id="mode-select">
+        <option value="2p">2 Pemain (Lokal)</option>
+        <option value="ai-easy">Lawan AI (Mudah)</option>
+        <option value="ai-hard">Lawan AI (Sulit/Minimax)</option>
+      </select>
+      <button class="btn" id="restart-btn" style="padding: 0.5rem 1rem;">Ulangi Game</button>
+    </div>
+
+    <div class="board" id="board">
+      <div class="cell" data-index="0"></div>
+      <div class="cell" data-index="1"></div>
+      <div class="cell" data-index="2"></div>
+      <div class="cell" data-index="3"></div>
+      <div class="cell" data-index="4"></div>
+      <div class="cell" data-index="5"></div>
+      <div class="cell" data-index="6"></div>
+      <div class="cell" data-index="7"></div>
+      <div class="cell" data-index="8"></div>
+    </div>
+
+    <div class="status" id="status-msg">Giliran X</div>
+    
+  </main>
+  <script src="../script.js"></script>
+  <script src="tic-tac-toe.js"></script>
+</body>
+</html>

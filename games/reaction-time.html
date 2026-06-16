@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reaction Time Test - Arcade Hub</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .reaction-area {
+      width: 100%;
+      height: 300px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      transition: background 0.1s;
+      user-select: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-bottom: 2rem;
+    }
+    .state-waiting { background: #ff4757; }
+    .state-ready { background: #2ed573; }
+    .state-early { background: #3742fa; }
+    .state-idle { background: var(--color-bg-2); border: 2px dashed var(--color-text-dim); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Reaction Test</h1>
+    <a href="../index.html" class="btn" style="font-size: 0.8rem;">KEMBALI KE LOBBY</a>
+  </header>
+  <main class="game-container">
+    <p class="subtitle mb-2">Klik area di bawah secepat mungkin saat warna berubah menjadi HIJAU!</p>
+    
+    <div id="reaction-area" class="reaction-area state-idle">
+      Klik untuk Memulai
+    </div>
+    
+    <div style="font-family: var(--font-title); font-size: 1.2rem;">
+      <p>Waktu: <span id="time-display" style="color: var(--color-accent);">0 ms</span></p>
+      <p class="mt-1" style="font-size: 0.8rem; color: var(--color-text-dim);">Rekor Terbaik: <span id="best-display">Belum ada</span></p>
+    </div>
+  </main>
+  <script src="../script.js"></script>
+  <script src="reaction-time.js"></script>
+</body>
+</html>

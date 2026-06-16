@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tebak Angka - Arcade Hub</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Tebak Angka</h1>
+    <a href="../index.html" class="btn" style="font-size: 0.8rem;">KEMBALI KE LOBBY</a>
+  </header>
+  <main class="game-container">
+    <p class="subtitle mb-2">Komputer memikirkan angka antara 1 hingga 100.</p>
+    <div style="font-size: 4rem; margin-bottom: 2rem; text-shadow: 0 0 20px rgba(0,242,254,0.5);">🔢</div>
+    <div id="game-ui">
+      <input type="number" id="guess-input" min="1" max="100" placeholder="1-100" style="padding: 12px; border-radius: 12px; font-size: 1.2rem; width: 120px; text-align: center; margin-right: 10px; background: rgba(255,255,255,0.05); border: 2px solid var(--color-accent); color: white; outline: none; transition: 0.3s;">
+      <button class="btn" id="guess-btn">TEBAK</button>
+    </div>
+    <p id="feedback" class="mt-2" style="font-size: 1.5rem; font-weight: 800; min-height: 2rem;"></p>
+    <p id="attempts" class="mt-1" style="color: var(--color-text-dim); font-family: var(--font-title); font-size: 0.8rem;">Percobaan: 0</p>
+    <button class="btn mt-2" id="reset-btn" style="display:none; background: linear-gradient(135deg, #ff4757, #ff6b81);">MAIN LAGI</button>
+  </main>
+  <script src="../script.js"></script>
+  <script src="guess-number.js"></script>
+</body>
+</html>

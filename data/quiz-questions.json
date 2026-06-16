@@ -1,0 +1,504 @@
+```json
+[
+  {
+  "question": "Ibu kota Indonesia adalah?",
+  "options": ["Bandung", "Jakarta", "Surabaya", "Medan"],
+  "answer": 1
+},
+{
+  "question": "Planet terbesar di tata surya adalah?",
+  "options": ["Mars", "Saturnus", "Jupiter", "Neptunus"],
+  "answer": 2
+},
+{
+  "question": "Berapa jumlah hari dalam satu minggu?",
+  "options": ["5", "6", "7", "8"],
+  "answer": 2
+},
+  {
+    "question": "Berapa kotak (sel) dalam papan Tic-Tac-Toe standar?",
+    "options": ["6", "8", "9", "16"],
+    "answer": 2
+  },
+  {
+    "question": "Dalam game Pac-Man, apa yang harus dimakan Pac-Man agar bisa memakan hantu?",
+    "options": ["Ceri", "Titik Kecil", "Power Pellet", "Bintang"],
+    "answer": 2
+  },
+  {
+    "question": "Planet terdekat dengan Matahari adalah?",
+    "options": ["Venus", "Mars", "Merkurius", "Bumi"],
+    "answer": 2
+  },
+  {
+    "question": "Ibu kota Indonesia adalah?",
+    "options": ["Bandung", "Jakarta", "Surabaya", "Medan"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa jumlah hari dalam satu minggu?",
+    "options": ["5", "6", "7", "8"],
+    "answer": 2
+  },
+  {
+    "question": "Hewan yang dikenal sebagai Raja Hutan adalah?",
+    "options": ["Harimau", "Singa", "Gajah", "Serigala"],
+    "answer": 1
+  },
+  {
+    "question": "Warna hasil campuran merah dan putih adalah?",
+    "options": ["Ungu", "Oranye", "Pink", "Cokelat"],
+    "answer": 2
+  },
+  {
+    "question": "Benua terbesar di dunia adalah?",
+    "options": ["Afrika", "Eropa", "Asia", "Amerika"],
+    "answer": 2
+  },
+  {
+    "question": "Lambang kimia untuk air adalah?",
+    "options": ["CO2", "H2O", "O2", "NaCl"],
+    "answer": 1
+  },
+  {
+    "question": "Siapa penemu lampu pijar?",
+    "options": ["Albert Einstein", "Isaac Newton", "Thomas Edison", "Galileo"],
+    "answer": 2
+  },
+  {
+    "question": "Hasil dari 8 x 7 adalah?",
+    "options": ["54", "56", "58", "64"],
+    "answer": 1
+  },
+  {
+    "question": "Planet yang dikenal sebagai Planet Merah adalah?",
+    "options": ["Mars", "Venus", "Saturnus", "Jupiter"],
+    "answer": 0
+  },
+  {
+    "question": "Bahasa resmi Jepang adalah?",
+    "options": ["Mandarin", "Korea", "Jepang", "Thailand"],
+    "answer": 2
+  },
+  {
+    "question": "Gunung tertinggi di dunia adalah?",
+    "options": ["Kilimanjaro", "Everest", "Fuji", "Elbrus"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa jumlah benua di dunia?",
+    "options": ["5", "6", "7", "8"],
+    "answer": 2
+  },
+  {
+    "question": "Mata uang Jepang adalah?",
+    "options": ["Won", "Yuan", "Yen", "Ringgit"],
+    "answer": 2
+  },
+  {
+    "question": "Siapa presiden pertama Indonesia?",
+    "options": ["Soeharto", "Habibie", "Soekarno", "Megawati"],
+    "answer": 2
+  },
+  {
+    "question": "Hewan tercepat di darat adalah?",
+    "options": ["Kuda", "Singa", "Cheetah", "Rusa"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa jumlah sisi segitiga?",
+    "options": ["2", "3", "4", "5"],
+    "answer": 1
+  },
+  {
+    "question": "Laut terbesar di dunia adalah?",
+    "options": ["Atlantik", "Hindia", "Pasifik", "Arktik"],
+    "answer": 2
+  },
+  {
+    "question": "Benda langit yang menjadi pusat tata surya adalah?",
+    "options": ["Bulan", "Mars", "Matahari", "Bumi"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa jumlah pemain dalam satu tim sepak bola di lapangan?",
+    "options": ["9", "10", "11", "12"],
+    "answer": 2
+  },
+  {
+    "question": "Hasil dari 100 dibagi 4 adalah?",
+    "options": ["20", "25", "30", "40"],
+    "answer": 1
+  },
+  {
+    "question": "Negara dengan piramida terkenal adalah?",
+    "options": ["India", "Mesir", "Italia", "Brasil"],
+    "answer": 1
+  },
+  {
+    "question": "Bunga nasional Indonesia adalah?",
+    "options": ["Melati", "Mawar", "Anggrek", "Tulip"],
+    "answer": 0
+  },
+  {
+    "question": "Apa nama satelit alami Bumi?",
+    "options": ["Mars", "Venus", "Bulan", "Merkurius"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa jumlah huruf alfabet bahasa Inggris?",
+    "options": ["24", "25", "26", "27"],
+    "answer": 2
+  },
+  {
+    "question": "Siapa yang menulis Harry Potter?",
+    "options": ["J.R.R. Tolkien", "J.K. Rowling", "Dan Brown", "Stephen King"],
+    "answer": 1
+  },
+  {
+    "question": "Hewan mamalia terbesar adalah?",
+    "options": ["Gajah", "Paus Biru", "Badak", "Hiu Paus"],
+    "answer": 1
+  },
+  {
+    "question": "Ibu kota Prancis adalah?",
+    "options": ["Berlin", "Madrid", "Paris", "Roma"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa jam dalam satu hari?",
+    "options": ["12", "18", "24", "48"],
+    "answer": 2
+  },
+  {
+    "question": "Planet terbesar di tata surya adalah?",
+    "options": ["Saturnus", "Jupiter", "Neptunus", "Uranus"],
+    "answer": 1
+  },
+  {
+    "question": "Warna bendera Indonesia adalah?",
+    "options": ["Merah Putih", "Merah Biru", "Putih Hijau", "Biru Putih"],
+    "answer": 0
+  },
+  {
+    "question": "Berapa hasil 15 + 20?",
+    "options": ["30", "35", "40", "45"],
+    "answer": 1
+  },
+  {
+    "question": "Alat untuk mengukur suhu adalah?",
+    "options": ["Barometer", "Termometer", "Speedometer", "Higrometer"],
+    "answer": 1
+  },
+  {
+    "question": "Samudra terkecil adalah?",
+    "options": ["Arktik", "Atlantik", "Pasifik", "Hindia"],
+    "answer": 0
+  },
+  {
+    "question": "Siapa pelukis Mona Lisa?",
+    "options": ["Van Gogh", "Picasso", "Leonardo da Vinci", "Michelangelo"],
+    "answer": 2
+  },
+  {
+    "question": "Berapakah hasil 9 kuadrat?",
+    "options": ["72", "81", "91", "99"],
+    "answer": 1
+  },
+  {
+    "question": "Negara asal pizza adalah?",
+    "options": ["Prancis", "Italia", "Spanyol", "Yunani"],
+    "answer": 1
+  },
+  {
+    "question": "Hewan yang bertelur dan menyusui adalah?",
+    "options": ["Kucing", "Platipus", "Anjing", "Sapi"],
+    "answer": 1
+  },
+  {
+    "question": "Mata uang Amerika Serikat adalah?",
+    "options": ["Euro", "Pound", "Dollar", "Yen"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa jumlah bulan dalam satu tahun?",
+    "options": ["10", "11", "12", "13"],
+    "answer": 2
+  },
+  {
+    "question": "Apa simbol kimia emas?",
+    "options": ["Ag", "Au", "Fe", "Go"],
+    "answer": 1
+  },
+  {
+    "question": "Ibu kota Australia adalah?",
+    "options": ["Sydney", "Melbourne", "Canberra", "Perth"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa hasil 50 - 18?",
+    "options": ["30", "31", "32", "33"],
+    "answer": 2
+  },
+  {
+    "question": "Planet bercincin terkenal adalah?",
+    "options": ["Mars", "Venus", "Saturnus", "Merkurius"],
+    "answer": 2
+  },
+  {
+    "question": "Siapa pencipta teori relativitas?",
+    "options": ["Newton", "Einstein", "Tesla", "Darwin"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa jumlah warna pelangi?",
+    "options": ["5", "6", "7", "8"],
+    "answer": 2
+  },
+  {
+    "question": "Hewan nasional Australia adalah?",
+    "options": ["Koala", "Kanguru", "Emu", "Dingo"],
+    "answer": 1
+  },
+  {
+    "question": "Apa ibu kota Korea Selatan?",
+    "options": ["Busan", "Incheon", "Seoul", "Daegu"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa hasil 12 x 12?",
+    "options": ["124", "132", "144", "156"],
+    "answer": 2
+  },
+  {
+    "question": "Benua Afrika berada di sebelah selatan benua?",
+    "options": ["Asia", "Eropa", "Australia", "Antartika"],
+    "answer": 1
+  },
+  {
+    "question": "Siapa penemu gravitasi menurut legenda apel jatuh?",
+    "options": ["Einstein", "Newton", "Galileo", "Faraday"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa jumlah kaki laba-laba?",
+    "options": ["6", "8", "10", "12"],
+    "answer": 1
+  },
+  {
+    "question": "Negara dengan Menara Eiffel adalah?",
+    "options": ["Italia", "Prancis", "Jerman", "Belgia"],
+    "answer": 1
+  },
+  {
+    "question": "Apa gas yang paling banyak di atmosfer bumi?",
+    "options": ["Oksigen", "Nitrogen", "Karbon Dioksida", "Hidrogen"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa hasil 144 ÷ 12?",
+    "options": ["10", "11", "12", "13"],
+    "answer": 2
+  },
+  {
+    "question": "Siapa tokoh utama dalam cerita Sherlock Holmes?",
+    "options": ["Watson", "Sherlock Holmes", "Moriarty", "Lestrade"],
+    "answer": 1
+  },
+  {
+    "question": "Negara terbesar di dunia berdasarkan luas wilayah?",
+    "options": ["Kanada", "China", "Amerika Serikat", "Rusia"],
+    "answer": 3
+  },
+  {
+    "question": "Berapa jumlah gigi orang dewasa normal?",
+    "options": ["28", "30", "32", "34"],
+    "answer": 2
+  },
+  {
+    "question": "Apa alat musik dengan tuts hitam putih?",
+    "options": ["Biola", "Piano", "Drum", "Flute"],
+    "answer": 1
+  },
+  {
+    "question": "Ibu kota Thailand adalah?",
+    "options": ["Bangkok", "Phuket", "Chiang Mai", "Pattaya"],
+    "answer": 0
+  },
+  {
+    "question": "Berapa hasil 7 x 8?",
+    "options": ["54", "56", "58", "64"],
+    "answer": 1
+  },
+  {
+    "question": "Bintang berada di galaksi apa?",
+    "options": ["Andromeda", "Bimasakti", "Triangulum", "Sombrero"],
+    "answer": 1
+  },
+  {
+    "question": "Apa bahasa resmi Brasil?",
+    "options": ["Spanyol", "Inggris", "Portugis", "Prancis"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa hasil 81 ÷ 9?",
+    "options": ["8", "9", "10", "11"],
+    "answer": 1
+  },
+  {
+    "question": "Siapa dewa petir dalam mitologi Nordik?",
+    "options": ["Odin", "Thor", "Loki", "Freya"],
+    "answer": 1
+  },
+  {
+    "question": "Apa nama sungai terpanjang di dunia yang sering diajarkan di sekolah?",
+    "options": ["Nil", "Amazon", "Yangtze", "Mississippi"],
+    "answer": 0
+  },
+  {
+    "question": "Berapa jumlah sisi persegi?",
+    "options": ["3", "4", "5", "6"],
+    "answer": 1
+  },
+  {
+    "question": "Negara asal sushi adalah?",
+    "options": ["China", "Korea", "Jepang", "Thailand"],
+    "answer": 2
+  },
+  {
+    "question": "Apa warna zamrud?",
+    "options": ["Merah", "Hijau", "Biru", "Kuning"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa hasil 25 x 4?",
+    "options": ["90", "95", "100", "105"],
+    "answer": 2
+  },
+  {
+    "question": "Ibu kota Kanada adalah?",
+    "options": ["Toronto", "Ottawa", "Vancouver", "Montreal"],
+    "answer": 1
+  },
+  {
+    "question": "Planet yang memiliki kehidupan yang diketahui saat ini adalah?",
+    "options": ["Mars", "Venus", "Bumi", "Jupiter"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa jumlah jari pada kedua tangan manusia normal?",
+    "options": ["8", "10", "12", "20"],
+    "answer": 1
+  },
+  {
+    "question": "Siapa penulis Laskar Pelangi?",
+    "options": ["Tere Liye", "Andrea Hirata", "Pramoedya", "Habiburrahman"],
+    "answer": 1
+  },
+  {
+    "question": "Apa ibu kota Malaysia?",
+    "options": ["Johor Bahru", "Kuala Lumpur", "Penang", "Malaka"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa hasil 6 x 9?",
+    "options": ["54", "56", "58", "60"],
+    "answer": 0
+  },
+  {
+    "question": "Hewan yang dapat berubah warna adalah?",
+    "options": ["Buaya", "Bunglon", "Harimau", "Zebra"],
+    "answer": 1
+  },
+  {
+    "question": "Apa simbol kimia perak?",
+    "options": ["Ag", "Au", "Ar", "Pt"],
+    "answer": 0
+  },
+  {
+    "question": "Berapa jumlah planet dalam tata surya?",
+    "options": ["7", "8", "9", "10"],
+    "answer": 1
+  },
+  {
+    "question": "Negara dengan Tembok Besar adalah?",
+    "options": ["China", "India", "Mongolia", "Jepang"],
+    "answer": 0
+  },
+  {
+    "question": "Berapa hasil 11 x 11?",
+    "options": ["111", "121", "131", "141"],
+    "answer": 1
+  },
+  {
+    "question": "Apa alat yang digunakan untuk melihat bintang?",
+    "options": ["Mikroskop", "Teleskop", "Periskop", "Binokular"],
+    "answer": 1
+  },
+  {
+    "question": "Ibu kota Jerman adalah?",
+    "options": ["Munich", "Berlin", "Hamburg", "Frankfurt"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa hasil 90 + 15?",
+    "options": ["95", "100", "105", "110"],
+    "answer": 2
+  },
+  {
+    "question": "Apa nama organ yang memompa darah?",
+    "options": ["Paru-paru", "Otak", "Jantung", "Ginjal"],
+    "answer": 2
+  },
+  {
+    "question": "Siapa yang menemukan benua Amerika bagi bangsa Eropa?",
+    "options": ["Magellan", "Columbus", "Cook", "Vespucci"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa hasil 200 ÷ 10?",
+    "options": ["10", "15", "20", "25"],
+    "answer": 2
+  },
+  {
+    "question": "Apa ibu kota India?",
+    "options": ["Mumbai", "Delhi", "New Delhi", "Kolkata"],
+    "answer": 2
+  },
+  {
+    "question": "Hewan yang hidup di kutub utara adalah?",
+    "options": ["Penguin", "Beruang Kutub", "Unta", "Kangguru"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa hasil 14 + 28?",
+    "options": ["40", "41", "42", "43"],
+    "answer": 2
+  },
+  {
+    "question": "Apa warna langit pada siang hari cerah?",
+    "options": ["Hijau", "Merah", "Biru", "Ungu"],
+    "answer": 2
+  },
+  {
+    "question": "Negara asal menara Pisa adalah?",
+    "options": ["Spanyol", "Italia", "Portugal", "Prancis"],
+    "answer": 1
+  },
+  {
+    "question": "Berapa hasil 5 pangkat 2?",
+    "options": ["15", "20", "25", "30"],
+    "answer": 2
+  },
+  {
+    "question": "Apa nama lapisan terluar bumi?",
+    "options": ["Inti", "Mantel", "Kerak", "Magma"],
+    "answer": 2
+  },
+  {
+    "question": "Berapa jumlah menit dalam satu jam?",
+    "options": ["30", "45", "60", "90"],
+    "answer": 2
+  }
+]
+```

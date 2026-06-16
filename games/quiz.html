@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Trivia - Arcade Hub</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .quiz-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: left;
+    }
+    .question-text {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .option-btn {
+      background: var(--color-bg-3);
+      border: 1px solid var(--color-accent);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .option-btn:hover {
+      background: rgba(0, 242, 254, 0.2);
+      transform: translateX(10px);
+    }
+    .option-btn.correct { background: #2ed573; border-color: #2ed573; color: black; }
+    .option-btn.wrong { background: #ff4757; border-color: #ff4757; color: white; }
+    
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-title);
+      font-size: 0.9rem;
+      color: var(--color-accent);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1 class="title">Quiz Trivia</h1>
+    <a href="../index.html" class="btn" style="font-size: 0.8rem;">KEMBALI KE LOBBY</a>
+  </header>
+  <main class="game-container" style="max-width: 600px;">
+    
+    <div id="quiz-setup">
+      <p class="mb-2">Jawab pertanyaan-pertanyaan berikut dengan cepat dan tepat. Data pertanyaan dimuat secara asinkron dari file JSON.</p>
+      <button class="btn" id="start-btn" style="padding: 1rem 3rem;">MULAI KUIS</button>
+      <p id="error-msg" style="color: #ff4757; margin-top: 1rem; display: none;">Gagal memuat pertanyaan.</p>
+    </div>
+
+    <div id="quiz-active" class="quiz-card" style="display: none;">
+      <div class="quiz-header">
+        <span id="q-counter">Soal 1 / 5</span>
+        <span id="q-score">Skor: 0</span>
+      </div>
+      <div class="question-text" id="question">Pertanyaan dimuat...</div>
+      <div class="options" id="options">
+        <!-- Buttons injected by JS -->
+      </div>
+      <button class="btn mt-2" id="next-btn" style="display:none; width: 100%;">Soal Selanjutnya ➡️</button>
+    </div>
+
+  </main>
+  <script src="../script.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>
