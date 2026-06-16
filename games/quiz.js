@@ -22,7 +22,7 @@ async function loadQuestions() {
     console.error("Fetch error:", error);
     errorMsg.style.display = "block";
     errorMsg.textContent =
-      "Gagal memuat pertanyaan (JSON). Periksa apakah file /data/quiz-questions.json terunggah bersama website ini.";
+      "Gagal memuat pertanyaan (JSON). Periksa apakah file ../data/quiz-questions.json ikut di-deploy ke GitHub Pages dan tidak 404.";
   }
 }
 
