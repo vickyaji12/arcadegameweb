@@ -115,7 +115,36 @@ function setLowScore(gameKey, score) {
   return false;
 }
 
-// ─── Page Entrance Animation ──────────────────────────────
+// ─── Page Entrance Animation & Security Restrictions ──────
 document.addEventListener('DOMContentLoaded', () => {
   document.body.style.opacity = '1';
+
+  // Blokir Klik Kanan (Context Menu)
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    showToast('Fitur inspeksi dinonaktifkan demi keamanan.', 'warning', 2000);
+  });
+
+  // Blokir Keyboard Shortcut untuk Inspect Element / Developer Tools
+  document.addEventListener('keydown', (e) => {
+    // F12
+    if (e.key === 'F12') {
+      e.preventDefault();
+      showToast('Developer tools dinonaktifkan.', 'warning', 2000);
+    }
+    // Ctrl+Shift+I (Inspect), Ctrl+Shift+J (Console), Ctrl+Shift+C (Element Inspector)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+      e.preventDefault();
+      showToast('Developer tools dinonaktifkan.', 'warning', 2000);
+    }
+    // Ctrl+U (View Source)
+    if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+      e.preventDefault();
+      showToast('Melihat kode sumber dinonaktifkan.', 'warning', 2000);
+    }
+    // Ctrl+S (Save Page) - opsional tetapi berguna mencegah download aset langsung
+    if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
+      e.preventDefault();
+    }
+  });
 });
